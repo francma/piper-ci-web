@@ -1,0 +1,40 @@
+{% extends "_layout.html" %}
+{% block body %}
+<header>
+{% include 'breadcrumbs.html' %}
+</header>
+{% if projects %}
+    <table class="table">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>origin</th>
+            <th>url</th>
+            <th>status</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for project in projects %}
+        <tr>
+            <td>{{ project.id }}</td>
+            <td>{{ project.origin }}</td>
+            <td>{{ project.url }}</td>
+            <td>{{ project.status }}</td>
+            <td><a href="{{ url_for('builds', project_id=project.id) }}">builds &raquo;</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+{% else %}
+    <div class="empty">
+        <div class="empty-icon">
+            <i class="icon icon-flag"></i>
+        </div>
+        <h4 class="empty-title">There are no projects</h4>
+    </div>
+{% endif %}
+{% endblock %}
+
+
+

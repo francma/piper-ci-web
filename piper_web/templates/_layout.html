@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Projects</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dot/2.0.0-beta.0/doT.min.js"></script>
+    <!--<script src="/static/script.js"></script>-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/picturepan2/spectre/846353cb/docs/dist/spectre.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    {% block script %}{% endblock %}
+</head>
+<body>
+    <section class="section section-header bg-gray">
+        <section class="grid-header container grid-960">
+            <nav class="navbar">
+                <section class="navbar-section">
+                    <a href="/" class="navbar-brand mr-10">Piper-CI</a>
+                    <a href="https://github.com/francma/piper-ci" class="btn btn-link">GitHub</a>
+                </section>
+                <section class="navbar-section">
+                    {% if identity %}
+                        <a href="/logout" class="btn btn-link">{{ identity.email }}</a>
+                    {% else %}
+                        <a href="{{ url_for('login') }}" class="btn btn-link">login</a>
+                    {% endif %}
+                </section>
+            </nav>
+        </section>
+    </section>
+    <div class="container grid-960">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="columns">
+                    {% for category, message in messages %}
+                        <div class="column col-12">
+                            <div class="toast toast-{{ category }}">{{ message }}</div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        {% block body %}{% endblock %}
+    </div>
+</body>
+</html>

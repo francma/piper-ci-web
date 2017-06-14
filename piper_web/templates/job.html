@@ -1,0 +1,28 @@
+{% extends "_layout.html" %}
+{% block body %}
+<header>
+{% include 'breadcrumbs.html' %}
+</header>
+<header>
+    <h5>Config</h5>
+</header>
+<pre class="code" data-lang="json"><code>{{ job | pretty_json }}</code></pre>
+<header>
+    <h5>Log</h5>
+</header>
+<pre class="code" data-lang="shell"><code id="log"></code></pre>
+{% endblock %}
+{% block script %}
+<script>
+var offset = 0;
+setInterval(function() {
+    var logEl = document.getElementById('log');
+    fetch('/logs/{{ job.id }}?offset=' + offset).then(function(response) {
+        return response.text();
+    }).then(function(text) {
+        offset += text.length;
+        logEl.innerHTML += text;
+    });
+}, 5000)
+</script>
+{% endblock %}

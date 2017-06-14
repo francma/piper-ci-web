@@ -1,0 +1,37 @@
+{% extends "_layout.html" %}
+{% block body %}
+<header>
+{% include 'breadcrumbs.html' %}
+</header>
+{% if builds %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>branch</th>
+                <th>commit</th>
+                <th>status</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for build in builds %}
+            <tr>
+                <td>{{ build.id }}</td>
+                <td>{{ build.branch }}</td>
+                <td>{{ build.commit }}</td>
+                <td>{{ build.status }}</td>
+                <td><a href="{{ url_for('detail', build_id=build.id, project_id=project_id) }}">detail &raquo;</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <div class="empty">
+        <div class="empty-icon">
+            <i class="icon icon-flag"></i>
+        </div>
+        <h4 class="empty-title">There are no builds</h4>
+    </div>
+{% endif %}
+{% endblock %}

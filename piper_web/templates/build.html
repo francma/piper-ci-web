@@ -1,0 +1,30 @@
+{% extends "_layout.html" %}
+{% block body %}
+<header>
+{% include 'breadcrumbs.html' %}
+</header>
+
+{% for stage in stages %}
+    <header>
+        <h5>Stage: {{ stage.name }}</h5>
+    </header>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>status</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for job in jobs[stage.id] %}
+            <tr>
+                <td>{{ job.id }}</td>
+                <td>{{ job.status}}</td>
+                <td><a href="{{ url_for('job_view', build_id=build_id, project_id=project_id, job_id=job.id) }}">detail &raquo;</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endfor %}
+{% endblock %}

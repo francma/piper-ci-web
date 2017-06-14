@@ -1,0 +1,13 @@
+.bg-gray {
+    background: #f1f1f1;
+    color: #666;
+    padding: 1rem;
+}
+
+.code {
+    color: #667189;
+}
+
+header {
+    padding-top: 4rem;
+}
