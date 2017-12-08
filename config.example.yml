@@ -1,0 +1,5 @@
+app:
+  secret: 'SECRET'
+  dummy: yes
+core:
+  base_url: 'http://localhost/'

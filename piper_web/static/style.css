@@ -8,6 +8,15 @@
     color: #667189;
 }
 
+.code-terminal {
+    background: black;
+    white-space: pre-wrap;
+}
+
+.code-terminal code {
+    background: black;
+}
+
 header {
     padding-top: 4rem;
 }

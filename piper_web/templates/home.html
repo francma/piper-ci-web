@@ -1,4 +1,5 @@
 {% extends "_layout.html" %}
+{% block title %}Projects{% endblock %}
 {% block body %}
 <header>
 {% include 'breadcrumbs.html' %}
@@ -21,7 +22,7 @@
             <td>{{ project.origin }}</td>
             <td>{{ project.url }}</td>
             <td>{{ project.status }}</td>
-            <td><a href="{{ url_for('builds', project_id=project.id) }}">builds &raquo;</a></td>
+            <td><a href="{{ url_for('project_view', project_id=project.id) }}">builds &raquo;</a></td>
         </tr>
         {% endfor %}
     </tbody>

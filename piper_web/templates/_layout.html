@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Projects</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dot/2.0.0-beta.0/doT.min.js"></script>
-    <!--<script src="/static/script.js"></script>-->
-    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/picturepan2/spectre/846353cb/docs/dist/spectre.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <title>{% block title %}:-){% endblock %} | PiperCI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='spectre.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     {% block script %}{% endblock %}
 </head>
 <body>
     <section class="section section-header bg-gray">
-        <section class="grid-header container grid-960">
+        <section class="grid-header container grid-xl">
             <nav class="navbar">
                 <section class="navbar-section">
                     <a href="/" class="navbar-brand mr-10">Piper-CI</a>
@@ -20,13 +18,13 @@
                     {% if identity %}
                         <a href="/logout" class="btn btn-link">{{ identity.email }}</a>
                     {% else %}
-                        <a href="{{ url_for('login') }}" class="btn btn-link">login</a>
+                        <a href="{{ url_for('login_view') }}" class="btn btn-link">login</a>
                     {% endif %}
                 </section>
             </nav>
         </section>
     </section>
-    <div class="container grid-960">
+    <div class="container grid-xl">
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 <div class="columns">

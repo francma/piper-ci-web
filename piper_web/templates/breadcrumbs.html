@@ -1,27 +1,27 @@
 <h4>
     <ul class="breadcrumb">
         <li class="breadcrumb-item">
-            <a href="{{ url_for('projects') }}">projects</a>
+            <a href="{{ url_for('home_view') }}">projects</a>
         </li>
-        {% if project_id %}
+        {% if project %}
             <li class="breadcrumb-item">
-                {{ project_id }}
+                {{ project.id }}
             </li>
             <li class="breadcrumb-item">
-                <a href="{{ url_for('builds', project_id=project_id) }}">builds</a>
-            </li>
-        {% endif %}
-        {% if build_id %}
-            <li class="breadcrumb-item">
-                <a href="{{ url_for('detail', project_id=project_id, build_id=build_id) }}">{{ build_id }}</a>
+                <a href="{{ url_for('project_view', project_id=project.id) }}">builds</a>
             </li>
         {% endif %}
-        {% if job_id %}
+        {% if build %}
+            <li class="breadcrumb-item">
+                <a href="{{ url_for('detail_view', project_id=project.id, build_id=build.id) }}">{{ build.id}}</a>
+            </li>
+        {% endif %}
+        {% if job %}
             <li class="breadcrumb-item">
                 jobs
             </li>
             <li class="breadcrumb-item">
-                {{ job_id }}
+                {{ job.id }}
             </li>
         {% endif %}
     </ul>

@@ -1,4 +1,5 @@
 {% extends "_layout.html" %}
+{% block title %}Project #{{ project.id }}{% endblock %}
 {% block body %}
 <header>
 {% include 'breadcrumbs.html' %}
@@ -21,7 +22,7 @@
                 <td>{{ build.branch }}</td>
                 <td>{{ build.commit }}</td>
                 <td>{{ build.status }}</td>
-                <td><a href="{{ url_for('detail', build_id=build.id, project_id=project_id) }}">detail &raquo;</a></td>
+                <td><a href="{{ url_for('detail_view', build_id=build.id, project_id=project.id) }}">detail &raquo;</a></td>
             </tr>
             {% endfor %}
         </tbody>
