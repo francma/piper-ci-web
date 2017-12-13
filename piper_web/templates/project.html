@@ -13,6 +13,8 @@
                 <th>commit</th>
                 <th>status</th>
                 <th></th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -22,6 +24,10 @@
                 <td>{{ build.branch }}</td>
                 <td>{{ build.commit }}</td>
                 <td>{{ build.status }}</td>
+                {% if identity %}
+                    <td><a href="{{ url_for('build_cancel', build_id=build.id) }}">cancel &raquo;</a></td>
+                    <td><a href="{{ url_for('build_restart', build_id=build.id) }}">restart &raquo;</a></td>
+                {% endif %}
                 <td><a href="{{ url_for('detail_view', build_id=build.id, project_id=project.id) }}">detail &raquo;</a></td>
             </tr>
             {% endfor %}

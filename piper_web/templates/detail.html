@@ -15,6 +15,8 @@
                 <th>id</th>
                 <th>status</th>
                 <th></th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -22,6 +24,10 @@
             <tr>
                 <td>{{ job.id }}</td>
                 <td>{{ job.status}}</td>
+                {% if identity %}
+                    <td><a href="{{ url_for('job_cancel', job_id=job.id) }}">cancel &raquo;</a></td>
+                    <td><a href="{{ url_for('job_restart', job_id=job.id) }}">restart &raquo;</a></td>
+                {% endif %}
                 <td><a href="{{ url_for('job_view', build_id=build.id, project_id=project.id, job_id=job.id) }}">detail &raquo;</a></td>
             </tr>
             {% endfor %}

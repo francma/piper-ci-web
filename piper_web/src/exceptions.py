@@ -4,3 +4,7 @@ class PiperException(Exception):
 
 class PiperPermissionError(PiperException):
     pass
+
+
+class PiperInvalidOperation(PiperException):
+    pass

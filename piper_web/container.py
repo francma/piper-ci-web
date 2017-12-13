@@ -97,6 +97,72 @@ class Container:
 
             return facade.get_log(identity, job_id, offset)
 
+        @app.route('/jobs/<int:job_id>/cancel')
+        @authorize
+        def job_cancel(identity, job_id):
+            try:
+                facade.cancel_job(identity, job_id)
+                flash('Job was canceled', 'success')
+            except PiperInvalidOperation as e:
+                flash("Job can't be canceled because it's already in finished state" + str(e))
+
+            return redirect(request.referrer)
+
+        @app.route('/stages/<int:stage_id>/cancel')
+        @authorize
+        def stage_cancel(identity, stage_id):
+            try:
+                facade.cancel_stage(identity, stage_id)
+                flash('Stage was canceled', 'success')
+            except PiperInvalidOperation:
+                flash("Stage can't be canceled because it's already in finished state")
+
+                return redirect(request.referrer)
+
+        @app.route('/builds/<int:build_id>/cancel')
+        @authorize
+        def build_cancel(identity, build_id):
+            try:
+                facade.cancel_build(identity, build_id)
+                flash('Build was canceled', 'success')
+            except PiperInvalidOperation:
+                flash("Build can't be canceled because it's already in finished state")
+
+            return redirect(request.referrer)
+
+        @app.route('/jobs/<int:job_id>/restart')
+        @authorize
+        def job_restart(identity, job_id):
+            try:
+                facade.restart_job(identity, job_id)
+                flash('Job was restarted', 'success')
+            except PiperInvalidOperation as e:
+                flash("Job can't be restarted because it's already in finished state" + str(e))
+
+            return redirect(request.referrer)
+
+        @app.route('/stages/<int:stage_id>/restart')
+        @authorize
+        def stage_restart(identity, stage_id):
+            try:
+                facade.restart_stage(identity, stage_id)
+                flash('Stage was restarted', 'success')
+            except PiperInvalidOperation:
+                flash("Stage can't be restarted because it's already in finished state")
+
+                return redirect(request.referrer)
+
+        @app.route('/builds/<int:build_id>/restart')
+        @authorize
+        def build_restart(identity, build_id):
+            try:
+                facade.restart_build(identity, build_id)
+                flash('Build was restarted', 'success')
+            except PiperInvalidOperation:
+                flash("Build can't be canceled because it's already in finished state")
+
+            return redirect(request.referrer)
+
         @app.route('/login', methods=['POST', 'GET'])
         def login_view():
             if request.method == 'POST':
@@ -107,7 +173,9 @@ class Container:
                     redirect(url_for('login'))
                 session['token'] = identity.token
                 session['email'] = identity.email
+
                 return redirect('/')
+
             return render_template('login.html')
 
         @app.route('/logout')
