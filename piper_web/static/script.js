@@ -3,8 +3,6 @@ job = function(job) {
         var offset = 0;
         var ansi_up = new AnsiUp;
         var code = document.getElementById('log');
-        const regex = /^::piper:(command|after_failure):(\d+):start:(\d+)::$/gm;
-        var m;
 
         var fn = function() {
             fetch('/logs/' + job.id + '?offset=' + offset, {credentials: 'same-origin'}).then(function(response) {
@@ -16,7 +14,7 @@ job = function(job) {
                     if(type === 'command') {
                         type = 'commands';
                     }
-                    return '$ ' + job[type][order];
+                    return '$ ' + job[type][order]['cmd'];
                 });
 
                 str = str.replace(/^::piper:(command|after_failure):(\d+):end:(\d+):(\d+)::$/gm, function(m, type, order, time, exitCode) {
@@ -28,8 +26,8 @@ job = function(job) {
                 code.innerHTML += ansi_up.ansi_to_html(str);
                 setTimeout(fn, 1000);
             });
-        }
+        };
 
         fn();
     });
-}
+};
