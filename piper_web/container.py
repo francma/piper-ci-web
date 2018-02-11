@@ -51,6 +51,7 @@ class Container:
 
         @app.errorhandler(PiperPermissionError)
         def handle_invalid_usage(error):
+            session.clear()
             flash('You need to be logged in', 'error')
             return redirect('/login')
 
