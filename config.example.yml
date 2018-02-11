@@ -1,5 +1,11 @@
 app:
+  # flask app secret
+  # see http://flask.pocoo.org/docs/0.12/quickstart/#sessions
   secret: 'SECRET'
-  dummy: yes
+  # if set to yes, app will run with fake data
+  # used for testing purposes
+  dummy: no
+
 core:
+  # base url pointing to your Piper CI core instance
   base_url: 'http://localhost/'
