@@ -1,0 +1,2 @@
+include piper_web/static/*
+include piper_web/templates/*

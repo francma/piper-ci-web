@@ -8,6 +8,7 @@ setup(
     description='Piper CI web interface using REST api',
     long_description=long_description,
     packages=find_packages(),
+    include_package_data=True,
     package_dir={'piper_web': 'piper_web'},
     author='Martin Franc',
     author_email='francma6@fit.cvut.cz',
